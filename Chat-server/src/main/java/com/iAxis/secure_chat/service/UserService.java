@@ -1,10 +1,12 @@
 package com.iAxis.secure_chat.service;
 
 import com.iAxis.secure_chat.dto.MessageDto;
+import com.iAxis.secure_chat.dto.UserDto;
 import com.iAxis.secure_chat.entity.User;
 import com.iAxis.secure_chat.entity.UserMessage;
 import com.iAxis.secure_chat.repository.UserMessageRepository;
 import com.iAxis.secure_chat.repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -62,6 +64,20 @@ public class UserService {
         userListMap.put(toUser, toMessageDtos);
 
         return userListMap;
+    }
+
+    public UserDto getNewUserCmd() {
+        return new UserDto();
+    }
+
+    public void encryptPassword(User user) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    }
+
+    public boolean matchPassword(User user, String rawPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.matches(rawPassword, user.getPassword());
     }
 
 }

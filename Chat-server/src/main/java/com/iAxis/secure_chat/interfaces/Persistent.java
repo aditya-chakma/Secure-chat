@@ -1,6 +1,8 @@
 package com.iAxis.secure_chat.interfaces;
 
 import jakarta.persistence.MappedSuperclass;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -13,8 +15,10 @@ public abstract class Persistent<T> {
 
     public abstract T getId();
 
+    @CreationTimestamp
     LocalDateTime created;
 
+    @UpdateTimestamp
     LocalDateTime updated;
 
     public LocalDateTime getCreated() {

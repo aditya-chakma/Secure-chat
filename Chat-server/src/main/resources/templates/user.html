@@ -1,33 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Create User</title>
-    <link rel="stylesheet" href="/styles.css"> <!-- Optional: Link to your CSS file -->
+    <link rel="stylesheet" href="/style.css"> <!-- Optional: Link to your CSS file -->
 </head>
 <body>
 <div class="container">
     <h1>Create User</h1>
-    <form th: th:action="@{/users}" method="post">
+    <form th:action="@{/user}" method="post">
         <div>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
         </div>
         <div>
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" required>
-        </div>
-        <div>
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" required>
-        </div>
-        <div>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
         </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
+
         <div class="buttons">
             <button type="submit">Sign Up</button>
             <button type="button" onclick="window.location.href='/'">Cancel</button>

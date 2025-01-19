@@ -1,10 +1,12 @@
 package com.iAxis.secure_chat.controller;
 
+import com.iAxis.secure_chat.dto.UserDto;
+import com.iAxis.secure_chat.entity.User;
 import com.iAxis.secure_chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author aditya.chakma
@@ -22,8 +24,15 @@ public class UserController {
     }
 
     @GetMapping
-    public String create() {
+    public String create(ModelMap model) {
+        model.addAttribute("userDto", userService.getNewUserCmd());
         return "user";
+    }
+
+    @PostMapping
+    @ResponseBody
+    public User create(@ModelAttribute UserDto userDto) {
+        return userDto.getUser();
     }
 
 }

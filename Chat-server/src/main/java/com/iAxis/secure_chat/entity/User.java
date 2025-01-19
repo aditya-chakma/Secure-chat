@@ -1,14 +1,15 @@
 package com.iAxis.secure_chat.entity;
 
 import com.iAxis.secure_chat.interfaces.Persistent;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Objects;
+
+import static com.iAxis.secure_chat.utils.StringUtils.isEmpty;
+import static com.iAxis.secure_chat.utils.StringUtils.isNotEmpty;
 
 /**
  * @author aditya.chakma
@@ -19,6 +20,7 @@ import java.util.Objects;
 public class User extends Persistent<Integer> {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotBlank
@@ -33,6 +35,10 @@ public class User extends Persistent<Integer> {
     @Override
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {
