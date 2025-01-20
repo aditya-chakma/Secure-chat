@@ -43,6 +43,16 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public void save(UserDto userDto) {
+        User user = userDto.getUser();
+
+        if (user.isNew()) {
+            encryptPassword(user);
+        }
+
+        userRepository.save(user);
+    }
+
     public Map<User, List<MessageDto>> getUserMessage(User fromUser, User toUser) {
         List<UserMessage> fromUserMessages = userMessageRepository.getByFromUserAndToUser(fromUser, toUser);
 

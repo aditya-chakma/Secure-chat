@@ -4,12 +4,10 @@ import com.iAxis.secure_chat.interfaces.Persistent;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Objects;
 
-import static com.iAxis.secure_chat.utils.StringUtils.isEmpty;
-import static com.iAxis.secure_chat.utils.StringUtils.isNotEmpty;
+import static com.iAxis.secure_chat.utils.EntityUtils.isValidIdentifier;
 
 /**
  * @author aditya.chakma
@@ -67,6 +65,10 @@ public class User extends Persistent<Integer> {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public boolean isNew() {
+        return !isValidIdentifier(id);
     }
 
 }
